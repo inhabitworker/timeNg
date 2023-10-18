@@ -1,0 +1,77 @@
+﻿.tagCard {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.2em;
+
+    outline: 1px dashed var(--mg);
+    padding: 1em;
+    padding-top: 0;
+}
+
+
+.tagHeader {
+    display: flex;
+    flex-direction: row;
+    gap: 0.2em;
+}
+
+.tagName h3 {
+    font-size: 2em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.tagName .subTitle {
+    font-size: 0.6em;
+    color: var(--mg);
+}
+
+.swatch {
+    color: var(--highlightText);
+    background-color: var(--highlight);
+    height: fit-content;
+    align-self: center;
+    font-size: 0.6em;
+    margin: 1em;
+    padding: 0.5em;
+    margin-top: 0em;
+    border-radius: 1em;
+}
+
+
+.tagDetails {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.6em;
+
+    width: fit-content;
+}
+
+.tagDetails h2 {
+    margin: 0;
+    font-size: 1em;
+}
+.tagDetails h3 {
+    margin: 0;
+    font-size: 0.8em;
+    font-weight: normal;
+}
+
+
+.actions {
+    visibility: hidden;
+    max-width: 50%;
+    opacity: 0;
+    position: absolute;
+    transform: translate(4em, -1.5em);
+    transition: all 0.2s;
+    z-index: 10;
+}
+.tagCard:hover .actions {
+    visibility: visible;
+    transform: translate(0em, -1.5em);
+    opacity: 1;
+}
+
+

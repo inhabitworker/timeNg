@@ -1,0 +1,96 @@
+﻿@using Web.Components.Common
+@inherits HeatmapBase 
+
+@if(Data == null)
+{
+    <Loading /> 
+}
+else
+{
+    <div class="heatmap">
+        @{
+            int width = 340;
+            int height = 76;
+
+            int left = 18;
+            int top = 12;
+            int bottom = 60;
+
+            int xOffset = 5;
+            int yOffset = 5;
+
+            int x = 0;
+
+            int monY = (int)DayOfWeek.Monday;
+            int wedY = (int)DayOfWeek.Wednesday;
+            int friY = (int)DayOfWeek.Friday;
+            int yAxisOffset = 4;
+
+            <svg class="heatmapSvg" viewBox="0 0 @width @height">
+                @while(Current != Start)
+                {   
+                    if(Current.Date >= DateTime.Now.Date) break;
+                    
+                    int y = (int)Current.DayOfWeek;
+                    double factor = Data.ContainsKey(Current) ? Data[Current] : 0;
+                    string linkParam = Current.ToString("ddMMyyyy");
+
+                    <rect
+                        class="dayDot"
+                        @onclick='() => DayNavigate(linkParam)'
+                        id="@Current.ToString("d")"
+                        x="@(left + (int)(x+ x*xOffset))"
+                        y="@(top + y*2 + y*yOffset)"
+                        height="@xOffset"
+                        width="@yOffset"
+                        fill="@("var(--highlight)")"
+                        opacity="@(0.2 + (0.8 * factor))"
+                    />
+
+                    // hover label 
+                    <text>
+                        <text
+                            class="dayDotLabel"
+                            x="@(54*xOffset)"
+                            y="@(top/2)"
+                        >
+                            @Current.ToString(@"dddd, dd/M/yyyy") [@(Data.ContainsKey(Current) ? (Data[Current]*(double)24).ToString("0.#") : 0) hrs]
+                        </text>
+                    </text>
+
+                    // months
+                    if(Current.DayOfWeek == DayOfWeek.Sunday && Current.AddDays(-7).Month != Current.Month)
+                    {
+                        <text>
+                            <text
+                                class="xAxis"
+                                x="@((int)(left + x + x*xOffset))"
+                                y="9"
+                                >
+                                @Current.ToString("MMM")
+                            </text>
+                        </text>
+                    }
+
+                    if (Current.DayOfWeek == DayOfWeek.Saturday) x += 1;
+                    Current = Current.AddDays(1);
+                }
+
+                <text class="yAxis" x="2" y="@(top + 2*monY + monY*yOffset + yAxisOffset)">Mon</text>
+                <text class="yAxis" x="2" y="@(top + 2*wedY + wedY*yOffset + yAxisOffset)">Wed</text>
+                <text class="yAxis" x="2" y="@(top + 2*friY + friY*yOffset + yAxisOffset)">Fri</text>
+          
+                <g class="legend">
+                    <text class="legendLabel" x="-9" y="@(yOffset)">0h</text>
+                    @for(var j = 0; j < 5; j++)
+                    {
+                       <rect x="@(j + j*xOffset)" height="@xOffset" width="@yOffset" fill="@("var(--highlight)")" opacity="@(0.2 * (j+1))"/> 
+                    }
+                    <text class="legendLabel" x="@(1 + 5 + 5*xOffset)" y="@(yOffset)">24h</text>
+                </g>
+            </svg>
+        }
+    </div>
+}
+
+

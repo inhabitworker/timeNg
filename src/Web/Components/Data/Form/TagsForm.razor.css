@@ -1,0 +1,13 @@
+﻿form {
+    width: fit-content;
+
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}
+
+.controls {
+    margin: auto;
+    width: fit-content;
+}
+

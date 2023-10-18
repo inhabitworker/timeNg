@@ -1,0 +1,73 @@
+﻿.heading {
+    display: flex;
+}
+
+    .heading aside::after {
+        content: " // ";
+    }
+
+.listOptions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.selectedActions {
+    display: flex;
+    gap: 1em;
+}
+
+.row {
+    display: flex;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.4em;
+    flex-grow: 1;
+}
+
+    .actions button {
+        display: block;
+    }
+
+
+/* selection */
+.heading {
+    display: flex;
+}
+
+.heading aside::after {
+    content: " // ";
+}
+
+.listOptions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.selectedActions {
+    display: flex;
+    gap: 1em;
+}
+
+.row {
+    display: flex;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.4em;
+
+    flex-grow: 1;
+}
+
+.actions button {
+    display: block;
+}
+

@@ -1,0 +1,57 @@
+﻿@using Web.Components.Common
+@using Web.Components.Common.Input
+@inherits IntervalEditBase
+
+<div class="intervalEdit">
+    @if(Interval!.Id == 0)
+    {
+        <h3>Create new interval:</h3>
+    }
+    else
+    {
+        <h3>Editing ID: @Interval.Id</h3>
+    }
+
+    <EditForm Model="@Interval" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="inputs">
+            <label for="start">Start: </label>
+            <InputDate id="start" 
+                Type="InputDateType.DateTimeLocal" 
+                step="1" 
+                min="@FormatDate(StartLimit)" 
+                max="@FormatDate(Interval.End!.Value.AddSeconds(-1))" 
+                @bind-Value="Interval.Start" />
+
+            <label for="end">End: </label>
+            <InputDate id="end" 
+                Type="InputDateType.DateTimeLocal" 
+                step="1" 
+                min="@FormatDate(Interval.Start.AddSeconds(1))" 
+                max="@FormatDate(EndLimit)" 
+                @bind-Value="Interval.End" />
+
+            <label for="tags">Tags: </label>
+            <InputTags id="tags" @bind-Value="Interval.Tags" />
+
+            <label for="annotation">Annotation:</label>
+            <InputTextArea id="annotation" @bind-Value="Interval.Annotation"/>
+        </div>
+
+        <div class="actions">
+            <button @onclick="HandleCancel">Cancel</button>
+
+            @if (Interval.Id == 0)
+            {
+                <button type="submit">Add</button>
+            }
+            else
+            {
+                <button @onclick="HandleDelete">Delete</button> 
+                <button type="submit">Apply</button>
+            }
+        </div>
+    </EditForm>
+</div>

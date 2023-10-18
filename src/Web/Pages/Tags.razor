@@ -1,0 +1,36 @@
+﻿@page "/tags/{Param?}"
+@using Web.Components.Data
+@using Web.Components.Data.Form
+@using Web.Components.Tags
+
+@inherits DataComponentBase<TagDTO, TagQuery>
+
+<TagsForm @bind-Filter="Filter" />
+
+<DataWrapper Parent="this">
+    <TagList Tags="Response!.Data.ToList()" />
+</DataWrapper>
+
+@code {
+    public override Task<QueryResponse<TagDTO>> Fetch() => _query.Tags(Filter);
+
+    [Parameter] public string? Param { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Filter = new();
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (Param != null)
+        {
+            // if valid tag -> add to query
+            // else -> navManager.NavigateTo("/tags");
+            Filter.Name = Param;
+        }
+    }
+
+}
+

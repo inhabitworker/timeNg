@@ -1,0 +1,24 @@
+﻿
+<EditForm Model="Source" OnValidSubmit="@Verify">
+    <DataAnnotationsValidator />
+
+</EditForm>
+
+@if(Verified == true)
+{
+    <div> ready to go. </div>
+}
+else
+{
+    <div> failed to verify. </div>
+}
+
+
+@code {
+    public IImportSource Source { get; set; }
+
+    public bool? Verified { get; set; }
+
+    public async Task Verify() => Verified = await Source.Verify();
+
+}

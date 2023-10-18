@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32526.322
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "src\Server\Server.csproj", "{37690D73-9974-4AFC-932B-84A071EFF791}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "src\Web\Web.csproj", "{B6F6D1BC-755D-476B-966F-6B9405BF07C7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "src\Shared\Shared.csproj", "{FC7568B2-050F-4906-BA08-FC32A5FB7270}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F4028B3A-EC36-4E59-8C2E-3AE769EB90D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AECC738F-EF7D-4C67-8E1E-1739485E1794}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Tests", "tests\Shared.Tests\Shared.Tests.csproj", "{7D2D9EC4-4E28-4B61-A13A-7705D4F37E2A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{07835817-BB47-4BBC-8327-3C87EE02AB64}"
+	ProjectSection(SolutionItems) = preProject
+		other\scripts\mock\data.lua = other\scripts\mock\data.lua
+		README.md = README.md
+		other\scripts\mock\testDataGen.lua = other\scripts\mock\testDataGen.lua
+		other\scripts\import\tog2tw.sh = other\scripts\import\tog2tw.sh
+		other\scripts\import\tt2tw.sh = other\scripts\import\tt2tw.sh
+		other\scripts\mock\util.lua = other\scripts\mock\util.lua
+		other\activitywatch\watcher.py = other\activitywatch\watcher.py
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37690D73-9974-4AFC-932B-84A071EFF791}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37690D73-9974-4AFC-932B-84A071EFF791}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37690D73-9974-4AFC-932B-84A071EFF791}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37690D73-9974-4AFC-932B-84A071EFF791}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6F6D1BC-755D-476B-966F-6B9405BF07C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6F6D1BC-755D-476B-966F-6B9405BF07C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6F6D1BC-755D-476B-966F-6B9405BF07C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6F6D1BC-755D-476B-966F-6B9405BF07C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC7568B2-050F-4906-BA08-FC32A5FB7270}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC7568B2-050F-4906-BA08-FC32A5FB7270}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC7568B2-050F-4906-BA08-FC32A5FB7270}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC7568B2-050F-4906-BA08-FC32A5FB7270}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D2D9EC4-4E28-4B61-A13A-7705D4F37E2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D2D9EC4-4E28-4B61-A13A-7705D4F37E2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D2D9EC4-4E28-4B61-A13A-7705D4F37E2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D2D9EC4-4E28-4B61-A13A-7705D4F37E2A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{37690D73-9974-4AFC-932B-84A071EFF791} = {F4028B3A-EC36-4E59-8C2E-3AE769EB90D2}
+		{B6F6D1BC-755D-476B-966F-6B9405BF07C7} = {F4028B3A-EC36-4E59-8C2E-3AE769EB90D2}
+		{FC7568B2-050F-4906-BA08-FC32A5FB7270} = {F4028B3A-EC36-4E59-8C2E-3AE769EB90D2}
+		{7D2D9EC4-4E28-4B61-A13A-7705D4F37E2A} = {AECC738F-EF7D-4C67-8E1E-1739485E1794}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {05952E4F-CBB4-4E63-A035-41092CC9AA4F}
+	EndGlobalSection
+EndGlobal

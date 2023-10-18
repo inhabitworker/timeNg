@@ -1,0 +1,36 @@
+﻿@page "/options"
+@using Web.Components.Options
+@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@inject IWebAssemblyHostEnvironment env
+
+<div class="options">
+
+    <section>
+        <h2>Config:</h2>
+        <Config />
+    </section>
+
+    <section>
+        <h2>Export:</h2>
+        <Export />
+    </section>
+
+    <section>
+        <h2>Import:</h2>
+        <Import />
+    </section>
+
+    @if(env.IsDevelopment())
+    {
+        <section>
+            <h2>Developer:</h2>
+            <Developer />
+        </section>
+    }
+
+</div>
+
+
+@code {
+
+}

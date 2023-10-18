@@ -1,0 +1,35 @@
+﻿@using Web.Components.Common.Input
+
+<div class="filter">
+    <EditForm Model="Filter" OnValidSubmit="QueryUpdate">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div id="range" class="range">
+            <span>Range:</span>
+            <InputDate id="range" Type="InputDateType.DateTimeLocal" step="1" max="@Filter.Latest!.Value.AddSeconds(-1)" @bind-Value="Filter.Earliest" />
+            <span> to </span>
+            <InputDate id="range" Type="InputDateType.DateTimeLocal" step="1" min="@Filter.Earliest!.Value.AddSeconds(1)" @bind-Value="Filter.Latest" />
+        </div>
+
+        <div class="tags">
+            <label for="tags">Tags:</label>
+            <InputTags id="tags" @bind-Value="Filter.Tags" Small="true" />
+        </div>
+
+        <button type="submit">Apply Filters</button>
+    </EditForm>
+</div>
+
+@code {
+    [Parameter] public IntervalQuery Filter {get;set;}
+    [Parameter] public EventCallback<IntervalQuery> FilterChanged { get; set; }
+
+
+    public void QueryUpdate()
+    {
+        FilterChanged.InvokeAsync(Filter);
+    }
+
+}
+

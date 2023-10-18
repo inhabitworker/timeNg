@@ -1,0 +1,13 @@
+﻿.topTags {
+    display: block;
+    margin: auto;
+    max-width: 75%;
+}
+
+.label {
+    font-size: 0.4em;
+    fill: var(--fg);
+}
+
+.nameLabel {
+}

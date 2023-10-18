@@ -1,0 +1,47 @@
+﻿.notificationContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+
+    padding: 0.2em;
+}
+
+button {
+   display: block;
+   height: fit-content;
+   margin-left: 0.2em;
+   visibility: hidden;
+}
+
+.notificationContainer:hover > button {
+    visibility: visible;
+}
+
+.notificationContent {
+    display: block;
+    padding: 0.2em;
+    outline: 1px solid var(--mg);
+    box-shadow: 2px 2px 4px var(--mg);
+}
+
+.notificationIcon {
+    display: inline-block;
+    width: 0.4em;
+    color: white;
+    padding: 0.4em;
+    text-align: center;
+}
+
+.notificationMessage {
+    margin-right: 0.2em;
+}
+
+.decay {
+    --remaining: 100%;
+    margin: 0;
+    width: var(--remaining);
+    background-color: var(--fg);
+    color: var(--fg);
+    transition: width 1s linear;
+}
+

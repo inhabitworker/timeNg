@@ -1,0 +1,53 @@
+﻿@using Shared.Models
+@typeparam TItem
+
+<div class="heading">
+    @if (Data != null)
+    {
+        <aside>
+            Total: @Data.Total
+        </aside>
+
+        <aside>
+            Showing: @Data.Data.Count() (@Data.PageSize)
+        </aside>
+
+        @if(Tracked != null)
+        {
+            <aside>
+                Tracked: @Tracked
+            </aside>
+        }
+
+        <div class="paging">
+            <button @onclick="() => SetPage.InvokeAsync(Data.Page - 1 >= 0 ? Data.Page - 1 : 0)"> - </button>
+            <span> Page: @Data.Page </span>
+            <button @onclick="() => SetPage.InvokeAsync(Data.Page + 1)"> + </button>
+        </div>
+    }
+</div>
+
+<hr />
+
+
+@code {
+    [CascadingParameter] public DateTime? Day { get; set; }
+
+    [Parameter] public QueryResponse<TItem>? Data { get; set; }
+
+    [Parameter] public EventCallback<int> SetPage { get; set; }
+
+    public string? Tracked = null;
+
+    protected override void OnParametersSet()
+    {
+        if(Day != null && Data is QueryResponse<IntervalDTO>)
+        {
+            Tracked = Time.Duration(Data as IEnumerable<IntervalDTO>, Day.Value).DurationString();
+        }
+        else
+        {
+            Tracked = null;
+        }
+    }
+}

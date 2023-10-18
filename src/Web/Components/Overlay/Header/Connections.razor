@@ -1,0 +1,27 @@
+﻿@inject StatusService statusService
+
+<div class="status">
+    <div class="online">
+        @(statusService.Online == false ? "offline" : "online")
+    </div>
+
+    <!--
+    @if (!statusService.DbAccessible)
+    {
+        <div class="db">
+            Db Offline!
+        </div>
+    } -->
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        statusService.OnStatusChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        statusService.OnStatusChange -= StateHasChanged;
+    }
+}

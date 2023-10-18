@@ -1,0 +1,48 @@
+﻿@page "/intervals/{Param?}"
+@using Web.Components.Data
+@using Web.Components.Data.Form
+@using Web.Components.Intervals
+
+@inherits DataComponentBase<IntervalDTO, IntervalQuery>
+
+<IntervalsForm @bind-Filter="Filter" />
+
+<DataWrapper Parent="this">
+    <IntervalList Intervals="Response!.Data.ToList()" />
+</DataWrapper>
+
+
+@code {
+    public override Task<QueryResponse<IntervalDTO>> Fetch() => _query.Intervals(Filter);
+
+    [Parameter] public string? Param { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Filter = new() 
+        { 
+            IncludeActive = false, 
+            Earliest = DateTime.Now.AddDays(-7), 
+            Latest = DateTime.Now 
+        };
+    }
+
+    protected override void OnParametersSet()
+    {
+        if(Param != null)
+        {
+            try
+            {
+                Filter.Tags = new List<string> { Uri.UnescapeDataString(Param) };
+            }
+            catch
+            {
+            }
+        }
+    }
+ }
+
+
+
+

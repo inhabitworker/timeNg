@@ -1,0 +1,18 @@
+﻿@inherits TagLabelBase 
+
+<div class="tag" small="@Small" readOnly="@ReadOnly" style="@StyleString">
+    @if(!ReadOnly)
+    {
+        <div class="tagLabel">@Name</div>
+    }
+    else
+    {
+        <NavLink class="tagLabel" href="@($"/tags/{Name}")">@Name</NavLink>
+    }
+
+    @if(!ReadOnly) 
+    {
+        <button class="removeTag" @onclick="() => Remove.InvokeAsync(Name)">X</button>
+    }
+</div>
+

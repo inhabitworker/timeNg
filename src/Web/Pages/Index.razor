@@ -1,0 +1,10 @@
+﻿@page "/"
+@inject NavigationManager Navigation
+
+@code {
+    protected async override Task OnInitializedAsync()
+    {
+        Navigation.NavigateTo($"/day/{DateTime.Now.ToString(@"ddMMyyyy")}");
+        await base.OnInitializedAsync();
+    }
+}

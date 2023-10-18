@@ -1,0 +1,69 @@
+﻿@inject IQueryService _query
+
+<div class="insert">
+    @if (IsInserting)
+    {
+        @if (EndLimit != null) { <div class="bound"> @EndLimit </div> }
+        <IntervalEdit StartLimit=StartLimit EndLimit=EndLimit Close="() => IsInserting = false"/>
+        @if (StartLimit != null) { <div class="bound"> @StartLimit </div> }
+    }
+    else if (!ReadOnly)
+    {
+        <button disabled="@DisableInsert" @onclick="() => IsInserting = true">
+            + @(DisableInsert ? "< 10min" : "")
+        </button>
+    }
+</div>
+
+@code {
+    [CascadingParameter] public bool ReadOnly { get; set; }
+    [Parameter] public DateTime? Floor { get; set; }
+    [Parameter] public DateTime? Ceiling { get; set; }
+
+    public DateTime? StartLimit { get; set; }
+    public DateTime? EndLimit { get; set; }
+
+    private bool _isInserting;
+    public bool IsInserting { get => _isInserting; set => _isInserting = value; }
+
+    public bool DisableInsert { get; set; } = false;
+
+    protected async override Task OnParametersSetAsync()
+    {
+        // Both bounds provided
+        if(Floor != null && Ceiling != null)
+        {
+            StartLimit = Floor.Value;
+            EndLimit = Ceiling.Value;
+        }
+        // Ceiling provided implies find a floor, aka preceding end
+        else if(Floor == null && Ceiling != null)
+        {
+            var getStart = await _query.Previous(Ceiling.Value);
+
+            if(getStart != null && getStart.End != null)
+            {
+                StartLimit = getStart.End.Value;
+            }
+
+            EndLimit = Ceiling.Value; 
+        }
+        // Floor provided implies find a ceiling, aka proceeding start
+        else if (Ceiling == null && Floor != null)
+        {
+            var getEnd = await _query.Next(Floor.Value);
+
+            if(getEnd != null)
+            {
+                EndLimit = getEnd.Start;
+            }
+
+            StartLimit = Floor.Value; 
+        }
+
+        if(StartLimit != null && ((EndLimit ?? DateTime.Now) - StartLimit).Value.TotalMinutes < 10)
+        {
+            DisableInsert = true;
+        }
+    }
+}

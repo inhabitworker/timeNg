@@ -1,0 +1,39 @@
+﻿@using Web.Components.Common
+
+@foreach(var interval in Intervals)
+{
+    var index = Intervals.IndexOf(interval);
+     
+    @if(Filter == null || Filter.Earliest == null || (interval.End ?? DateTime.Now).Date == Filter.Earliest.Value.Date)
+    {
+        <div class="bridge">
+            <IntervalTimelineInsert
+                @key="@($"{interval.Start}head")"
+                Floor="interval.End!.Value" 
+                Ceiling="Intervals.ElementAtOrDefault(index-1)?.Start ?? null"/>
+        </div>
+        
+    }
+
+    <IntervalTimelineNode @key="interval" Interval="interval" />
+
+    <div class="bridge">
+        @if(Filter == null || Filter.Earliest == null || index == Intervals.Count - 1 && interval.Start.Date == Filter.Earliest.Value.Date)
+        {
+            <IntervalTimelineInsert
+                @key="@($"{interval.Start}tail")"
+                Ceiling="interval.Start" />
+        }
+        else if (ReadOnly && index != Intervals.Count - 1)
+        {
+           <div class="bridgeStatic">|</div> 
+        }
+    </div>
+}
+
+@code {
+    [CascadingParameter] public bool ReadOnly { get; set; } = true;
+    [CascadingParameter] public IntervalQuery? Filter { get; set; }
+
+    [Parameter, EditorRequired] public List<IntervalDTO> Intervals { get; set; }
+}

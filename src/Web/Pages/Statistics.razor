@@ -1,0 +1,20 @@
+﻿@page "/statistics"
+@using Web.Components.Statistics
+@inherits StatisticsBase
+
+<div class="statistics">
+    <section>
+        <h2>Heatmap:</h2>
+        <Heatmap Data="HeatmapData"/>
+    </section>
+
+    <section>
+        <h2>Top Tags:</h2>
+        <TopTags Data="TopTagsData"/>
+    </section>
+
+    <section>
+        <h2>Other:</h2>
+        <Misc Data="MiscStatsData"/>
+    </section>
+</div>

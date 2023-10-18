@@ -1,0 +1,23 @@
+﻿@using Shared.Models.Import
+@inject HttpClient client
+
+<EditForm Model="Source" OnValidSubmit="@Verify">
+    <DataAnnotationsValidator />
+
+    <label for="user">Username:</label>
+    <InputText name="user" Value="@Source.Username"/>
+
+    <label for="pass">Password:</label>
+    <InputText name="pass" Value="@Source.Password"/>
+</EditForm>
+
+@code {
+    [Parameter] public EventCallback<bool> OnVerified { get; set; }
+    public TogglSource Source { get; set; }
+
+    public async void Verify() 
+    {
+        var res = await Source.Verify();
+        await OnVerified.InvokeAsync(res);
+    }
+}

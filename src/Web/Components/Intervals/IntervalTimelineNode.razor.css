@@ -1,0 +1,124 @@
+﻿.intervalCard {
+    position: relative;
+    width: fit-content;
+    min-width: 50%;
+    margin: auto;
+}
+
+.record {
+    display: flex;
+    outline: 2px solid var(--mg);
+    border-radius: 0.2em;
+    padding: 0.6em;
+    margin: auto;
+    width: 100%;
+}
+
+.duration {
+    flex-shrink: 0;
+    align-self: center;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+
+    font-family: monospace;
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.intervalTags {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.annotation {
+    position: absolute;
+    top: 70%;
+    left: 0;
+    right: 0;
+    z-index: 2;
+
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 1em;
+    text-align: left;
+
+}
+.annotation .label {
+    display: block;
+
+    font-weight: bold;
+    font-size: 1em;
+    opacity: 0.8;
+    margin-right: 0.3em;
+    padding: 0.4em;
+}
+.annotation .content {
+    display: block;
+
+    max-width: 28em;
+    font-size: 0.8em;
+    padding: 0.6em;
+    border: 1px solid var(--mg);
+    border-radius: 0.4em;
+
+    background-color: var(--bg);
+}
+
+
+.actions {
+    visibility: hidden;
+    max-width: 50%;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    transform: translate(4em, -1.5em);
+    transition: all 0.2s;
+    z-index: 10;
+}
+.intervalCard:hover .actions {
+    visibility: visible;
+    transform: translate(0em, -1.5em);
+    opacity: 1;
+}
+
+
+.small {
+    margin: auto;
+    width: fit-content;
+    font-size: 0.8em;
+    text-align: center;
+    color: var(--mg);
+    border-radius: 0.6em;
+    padding: 0.4em;
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+}
+
+@media only screen and (max-width: 900px) {
+    .intervalCard {
+        width: 90%;
+        margin: auto;
+    }
+    .record {
+        width: 100%;
+        padding: 0em;
+    }
+
+    .duration {
+        text-align: left;
+        align-self: start;
+        padding: 0.2em;
+        padding-bottom: 0.2em;
+    }
+
+    .small {
+        font-size: 0.6em;
+    }
+
+    .annotation .content {
+        max-width: 100%;
+    }
+}
+

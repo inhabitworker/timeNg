@@ -1,0 +1,51 @@
+﻿@using Web.Components.Tags
+@inherits InputTagsBase
+
+<!-- 
+    Catering for "existing" mode (dont custom input, no input in suggestion list for clickability) 
+    and more just made this more complex than need to be and go too far from opinion
+-->
+
+<div class="tagInput">
+    <div class="tagGroup">
+        @if(CurrentValue != null && CurrentValue.Count() > 0)
+        {
+            @foreach(string tag in CurrentValue) 
+            { 
+                <TagLabel Name="@tag" ReadOnly="false" Small="@Small" Remove="Remove"/> 
+            }
+        }
+
+    @if (!IsAdding)
+    {
+        <button type="button" class="addButton" @onclick="BeginAdding" small="@Small" >+</button>
+    }
+    else
+    {
+        <div class="blur" @onclick="CancelAdding" />
+
+        /*
+            @onsubmit:preventDefault="true"
+            @onsubmit:stopPropagation="true"
+            @onkeydown="KeyDownHandler"
+            @onkeypress="KeyPressHandler"
+            @onkeypress:preventDefault
+        */
+
+        <div class="addTag">
+            <input class="inputTagText" type="text" 
+                @bind="inputText" 
+                @bind:event="oninput" 
+                @ref="inputField" 
+                @onkeyup="OnKeyUp"/>
+
+            <div class="suggestions"> 
+                @foreach(var tag in SuggestedTags)
+                {
+                    <div class="suggestion" @onclick="() => Add(tag)">@(tag)</div>
+                }
+            </div>
+        </div>
+    }
+    </div>
+</div>

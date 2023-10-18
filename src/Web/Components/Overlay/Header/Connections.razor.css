@@ -1,0 +1,12 @@
+﻿.status {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    font-size: 0.8em;
+    margin-right: 0.2em;
+}
+
+.online {
+    display: block;
+    width: fit-content;
+}

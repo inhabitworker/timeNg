@@ -1,0 +1,118 @@
+﻿@using Shared.Models
+@typeparam T 
+@typeparam U where U : Query
+
+<div class="heading">
+
+    <div class="metadata">
+        <aside>Total: @(Data != null ? Data.Total : "???")</aside>
+        <aside>Showing: @(Data != null ? Data.Data.Count() : "???")  (@(Data != null ? Data.PageSize : "???"))</aside>
+    </div>
+
+    <div class="paging">
+        @if(Data != null)
+        {
+            @if(PageSize != 0)
+            {
+                <div class="pageButtons">
+                    <button 
+                        disabled="@(Filter.Page == 0)" 
+                        @onclick="() => Page = Page - 1"> 
+                        @("<") 
+                    </button>
+                    <button 
+                        disabled="@(Page == Pages())"
+                        @onclick="() => Page = Page + 1"> 
+                        @(">") 
+                    </button>
+                </div>
+
+                <div class="pageOption"> 
+                    Page: 
+                    <InputSelect @bind-Value="Page">
+                        @for(var i = 0; i <= Pages(); i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </InputSelect>
+                </div>
+            }
+
+            <div class="pageOption">
+                Quantity:
+                <InputSelect @bind-Value="PageSize">
+                    @for(var i = 1; i <= 5; i++)
+                    {
+                        <option value="@(i*20)">@(i*20)</option>
+                    }
+                    <option value="0">All</option>
+                </InputSelect>
+            </div>
+        }
+        else
+        {
+            <span>???</span>
+        }
+    </div>
+</div>
+
+<hr />
+
+
+@code {
+    [Parameter] public QueryResponse<T>? Data { get; set; }
+
+    [Parameter] public U Filter { get; set; }
+    [Parameter] public EventCallback<U> FilterChanged { get; set; }
+
+    public int Page 
+    { 
+        get => Filter.Page; 
+        set 
+        {
+            if (Filter.Page != value) 
+            {
+                Filter.Page = value;
+                QueryUpdate();
+            }
+
+        }
+    }
+
+    public int PageSize 
+    { 
+        get => Filter.PageSize; 
+        set 
+        {
+            if (Filter.PageSize != value) 
+            {
+                Filter.PageSize = value;
+                QueryUpdate();
+            }
+
+        }
+    }
+
+    public int Pages() => (int)Math.Ceiling((decimal)(Data!.Total/PageSize));
+
+    public async Task QueryUpdate() => await FilterChanged.InvokeAsync(Filter);
+
+    protected override void OnParametersSet()
+    {
+        Page = Filter.Page;
+        PageSize = Filter.PageSize;
+
+        /*
+        if(Day != null && TItem is IntervalDTO)
+        {
+            Tracked = Time.Duration(Data as IEnumerable<IntervalDTO>, Day.Value).DurationString();
+        }
+        else
+        {
+            Tracked = null;
+        }*/
+    }
+
+    // public string? Tracked = null;
+}
+

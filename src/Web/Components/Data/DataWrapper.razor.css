@@ -1,0 +1,9 @@
+﻿.view {
+    width: 100%;
+}
+
+.failed, .small {
+    display: block;
+    width: fit-content;
+    margin: auto;
+}

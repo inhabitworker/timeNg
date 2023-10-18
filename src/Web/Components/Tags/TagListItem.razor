@@ -1,0 +1,68 @@
+﻿@using System.Drawing
+@using Web.Services
+@using Web.Components.Tags
+@using Web.Components.Intervals
+@using Web.Components.Common
+@using Shared.Helpers
+@inherits TagCardBase 
+
+<div class="tagCard">
+    @if (!ReadOnly & !IsEditing)
+    {
+        <div class="actions">
+            <button @onclick="() => IsEditing = !IsEditing">Rename</button>
+            <button @onclick="HandleDelete">Delete</button>
+        </div>
+    }
+
+    <div class="tagHeader">
+
+        <!-- renaming tag, check for name in config and offer rename -->
+        <div class="tagName">
+            @if(!IsEditing) 
+            {
+                <h3>
+                    <span class="subTitle">Tag: </span>
+                    @Tag.Name
+                </h3>
+            }
+            else
+            {
+                <input type="text"  @bind="newName" />
+
+                <button @onclick="async () => await TrySubmit()">
+                    &#128504;
+                </button>
+                <button @onclick="() => IsEditing = false">
+                    X
+                </button>
+            }
+        </div>
+
+
+        @if (Colour == null)
+        {
+            <figure class="swatch">Unspecified</figure>
+        }
+        else
+        {
+            <figure class="swatch" style='@($"background-color: {Colour}; color: {Style.GetFontColour(Colour)}")'>@Colour</figure>
+        }
+    </div>
+    
+    <div class="tagDetails">
+        <h2>Freq:</h2>
+        <NavLink href="@($"intervals/{Tag.Name}")">@Tag.Intervals.Count()</NavLink>
+    </div>
+</div>
+
+<!--
+    <details>
+        <summary>Intervals tagged:</summary>
+
+        <IntervalList Filter="Filter" />
+    </details>
+-->
+    
+
+

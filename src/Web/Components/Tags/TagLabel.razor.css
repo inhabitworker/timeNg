@@ -1,0 +1,127 @@
+﻿/* warning warning go deep for navlink anchor style */
+
+/* contain mainlink and removal */
+/* the size will "cascade" by rem, very important */
+.tag {
+    display: flex;
+    flex-direction: row;
+    z-index: 0;
+
+    outline: 2px double var(--mg);
+    transition: 0.2s all;
+
+    flex-grow: 0;
+    width: fit-content;
+
+    margin: 0.5em;
+    border-radius: 0.4em;
+}
+
+.tag[small] {
+    margin: 0.4em;
+    border-radius: 0.8em;
+}
+
+.tag:hover {
+    outline: 2px solid var(--fg);
+}
+
+/* replace defaults for navlink anchor replace */
+::deep a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+
+    color: var(--highlightText);
+}
+
+::deep a:visited {
+    /* color: var(--bg); */
+    color: var(--highlightText);
+}
+
+/* label part */
+::deep .tagLabel {
+    font-size: 0.8em;
+
+    background-color: var(--highlight);
+    color: var(--highlightText);
+    border-radius: inherit;
+    
+    outline: none;
+    z-index: 1;
+    padding: 0.6em;
+    align-self: center;
+    flex-shrink: 0;
+    transition: all 0.3s;
+}
+
+::deep .tag[small] .tagLabel {
+    font-size: 0.7em; 
+}
+
+
+::deep .tagLabel span {
+    opacity: 1;
+}
+
+.tag:hover ::deep .tagLabel {
+}
+
+/* count */
+.tag .count {
+    color: var(--fg);
+    padding-right: 0.4em;
+    padding-left: 0.4em;
+    padding-top: 0.6em;
+}
+
+/* remover part */
+button {
+    border: none;
+}
+
+.tag .removeTag {
+    background-color: var(--bg);
+    z-index: 0;
+
+    border-radius: inherit;
+    outline: none;
+    color: var(--fg);
+
+    transition: all 0.2s;
+    padding-left: 2.2em;
+    margin-left: -1.7em;
+    opacity: 1;
+}
+
+.tag:hover .removeTag {
+}
+
+.tag:hover .removeTag:hover {
+    background-color: red;
+    color: var(--bg);
+}
+
+.removeTag {
+    cursor:pointer;
+}
+
+
+@media only screen and (max-width: 900px) {
+    .tag .removeTag {
+        outline: 1px solid var(--fg);
+        color: red;
+        margin-left: -1.7em;
+        opacity: 1;
+    }
+
+    ::deep a {
+        font-size: 0.6em;
+    }
+
+    .tag ::deep .tagLabel {
+        font-size: 0.2em;
+    }
+}
+

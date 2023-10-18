@@ -1,0 +1,16 @@
+﻿@using Web.Components.Common
+@inherits  MiscBase
+
+@if(Data == null)
+{
+    <Loading />
+}
+else
+{
+    <aside>
+        <p>Total intervals: @Data.TotalIntervals</p>
+        <p>Total tags: @Data.TotalTags</p>
+        <p>Oldest interval: @(Data.Oldest == null ? "n/a" : Data.Oldest.Start.ToString("G"))</p>
+    </aside>
+}
+

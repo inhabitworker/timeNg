@@ -1,0 +1,27 @@
+﻿<nav>
+    
+    <figure>
+        &#128337;
+    </figure>
+
+    <NavLink href=@($"day/{DateTime.Now.ToString("ddMMyyyy")}") ActiveClass="active" Match="NavLinkMatch.Prefix">
+        /day 
+    </NavLink>
+    <NavLink href="intervals" ActiveClass="active" Match="NavLinkMatch.Prefix">
+        /intervals
+    </NavLink>
+    <NavLink href="tags" ActiveClass="active" Match="NavLinkMatch.Prefix">
+        /tags
+    </NavLink>
+    <NavLink href="statistics" ActiveClass="active" Match="NavLinkMatch.Prefix">
+        /statistics 
+    </NavLink>
+    <NavLink href="options" ActiveClass="active" Match="NavLinkMatch.Prefix">
+        /options
+    </NavLink>
+</nav>
+
+
+@code {
+
+}

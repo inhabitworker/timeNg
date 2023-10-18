@@ -1,0 +1,48 @@
+﻿@using System.Text
+@using System.Text.Json
+@inject IQueryService query
+@inject IJSRuntime jsRuntime
+
+<div class="data">
+    <h3>Data:</h3>
+    <button @onclick="DownloadData">JSON</button>
+    <button>CSV</button>
+</div>
+
+<div class="config">
+    <h3>Config:</h3>
+    <button @onclick="DownloadConfig">JSON</button>
+    <button>CSV</button>
+</div>
+
+@code {
+    private async Task DownloadData()
+    {
+        IntervalQuery qry = new() { PageSize = 0 };
+        var data = await query.Intervals(qry);
+        var json = JsonSerializer.Serialize(data, new JsonSerializerOptions() { WriteIndented = true }) ?? "";
+
+        var encoding = new ASCIIEncoding();
+        var encoded = encoding.GetBytes(json);
+
+        var fileStream = new MemoryStream(encoded);
+        using DotNetStreamReference streamRef = new DotNetStreamReference(stream: fileStream);
+
+        await jsRuntime.InvokeVoidAsync("downloadFileFromStream", "timeNetData.json", streamRef);
+    }
+
+    private async Task DownloadConfig()
+    {
+        var config = await query.Config();
+        var json = JsonSerializer.Serialize(config, new JsonSerializerOptions() { WriteIndented = true }) ?? "";
+
+        var encoding = new ASCIIEncoding();
+        var encoded = encoding.GetBytes(json);
+
+        var fileStream = new MemoryStream(encoded);
+        using DotNetStreamReference streamRef = new DotNetStreamReference(stream: fileStream);
+
+        await jsRuntime.InvokeVoidAsync("downloadFileFromStream", "config.json", streamRef);
+    }
+
+}

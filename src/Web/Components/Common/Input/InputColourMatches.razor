@@ -1,0 +1,23 @@
+﻿@using Web.Services
+@inherits InputColourMatchesBase
+
+@if (_mutable != null && _mutable.Any())
+{
+    @for(var i = 0; i < _mutable.Count(); i++)
+    {
+        <div @key="i" class="colPair">
+            <input type="text" @bind="_mutable[i].Regex" @onkeyup="Mutate"/>
+            <input type="color" @bind="_mutable[i].Colour" @bind:event="oninput" @onchange="Mutate" />
+
+            <button @onclick='() => Remove(_mutable[i])'>x</button>
+            <!-- native input is safe without parse -->
+        </div>
+    }
+}
+else
+{
+    <span>No colours specified.</span>
+}
+
+<button @onclick='() => Add(new() { Regex = "", Colour = config.Highlight } )'>+</button> 
+

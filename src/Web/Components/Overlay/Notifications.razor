@@ -1,0 +1,12 @@
+﻿@inherits NotificationsBase
+
+<div class="notifications">
+    @if(_notifications.Count > 0)
+    {
+        foreach(var notif in _notifications)
+        {
+            <NotificationComponent @key="notif" Value="notif"/>
+        }
+    }
+</div>
+

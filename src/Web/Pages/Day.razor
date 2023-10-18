@@ -1,0 +1,57 @@
+﻿@page "/day/{Param?}"
+
+@using Web.Components.Data
+@using Web.Components.Data.Form
+@using Web.Components.Intervals
+
+@inherits DataComponentBase<IntervalDTO, IntervalQuery>
+
+<DayForm @bind-Filter="Filter" />
+
+<DataWrapper Parent="this">
+    <IntervalTimeline Intervals="Response!.Data.ToList()" />
+</DataWrapper>
+
+@code {
+    public override Task<QueryResponse<IntervalDTO>> Fetch() => _query.Intervals(Filter);
+
+    [Parameter] public string? Param { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        Filter = new() 
+        { 
+            IncludeActive = false, 
+            // no paging
+            PageSize = 0,  
+            Earliest = DateTime.Now.Date, 
+            Latest = DateTime.Now.Date.AddDays(1)
+        };
+
+        if(Param != null)
+        {
+            try
+            {
+                int d = Int32.Parse(Param.Substring(0, 2));
+                int m = Int32.Parse(Param.Substring(2, 2));
+                int y = Int32.Parse(Param.Substring(4, 4));
+                var paramDate = new DateTime(y,m,d);
+
+                if (paramDate != Filter.Earliest!.Value.Date)
+                {
+                    Filter.Earliest = paramDate.Date;
+                    Filter.Latest = paramDate.Date.AddDays(1);
+                }
+            }
+            catch
+            {
+            }
+        }
+    }
+
+    /* protected void Next() => //Day = Day.AddDays(1);
+        navManager.NavigateTo($"day/{Day.AddDays(1).ToString(@"ddMMyyyy")}");
+    protected void Prev() => //Day = Day.AddDays(-1);
+        navManager.NavigateTo($"day/{Day.AddDays(-1).ToString(@"ddMMyyyy")}"); */
+
+}

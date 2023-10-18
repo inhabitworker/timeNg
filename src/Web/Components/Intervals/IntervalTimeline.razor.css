@@ -1,0 +1,52 @@
+﻿.small {
+    margin: auto;
+    width: fit-content;
+    font-size: 0.8em;
+    text-align: center;
+    color: var(--mg);
+    border-radius: 0.6em;
+    padding: 0.4em;
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+}
+
+.bridge {
+    margin: 0;
+    margin: auto;
+
+    width: 100%;
+    color: var(--mg);
+    text-align: center;
+
+    height: fit-content;
+
+    transition: 0.25s all;
+}
+
+
+
+@media only screen and (max-width: 900px) {
+    .bridge.readOnly {
+        height: initial; 
+    }
+
+    .bridge.readOnly span {
+        display: block;
+    }
+
+    .bridge {
+        height: initial;
+    }
+
+    .bridge:hover {
+        height: initial;
+    }
+
+    .bridge span {
+        display: none;
+    }
+
+    .bridge button {
+        display: block;
+    }
+}

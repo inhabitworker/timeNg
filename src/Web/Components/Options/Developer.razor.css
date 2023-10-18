@@ -1,0 +1,22 @@
+﻿.devActions {
+    display: flex;
+    gap: 1em;
+}
+
+.actionSet {
+    margin: 0.2em;
+}
+
+.actionSet h4{
+    margin: 0.2em;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+}
+
+.actions button {
+    width: fit-content;
+    margin: 0.2em;
+}

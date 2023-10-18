@@ -1,0 +1,9 @@
+﻿@using Web.Components.Common
+@inherits IntervalListBase
+
+<!-- Virtualize -->
+
+@foreach(var interval in SelectableIntervals)
+{
+    <IntervalListRow @key="interval.Id" Interval="interval" />
+}

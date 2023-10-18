@@ -1,0 +1,45 @@
+﻿@using Web.Components.Tags
+@using Web.Components.Common.Input
+@using Web.Components.Common
+@inherits ActiveBase
+
+<div class="active">
+
+    <div class="elapsed">
+        <span class="@(IsActive ? "elapsedActive" : "")">@_elapsedString</span>
+    </div>
+
+    <div class="tags">
+        <EditForm EditContext="@editContext">
+            <DataAnnotationsValidator />
+
+            <InputTags @bind-Value="Active.Tags" />
+            <ValidationMessage For="() => Active.Tags" />
+
+            <InputText @bind-Value="Active.Annotation" />
+            <ValidationMessage For="() => Active.Annotation" />
+        </EditForm>
+    </div>
+
+
+    <div class="actions" >
+        @if (IsActive)
+        {
+            <button class="major stop" @onclick="Stop">
+                <span>&#9632;</span>
+            </button>
+            <button class="minor continue" @onclick="Cancel"> 
+                Cancel
+            </button>
+        } 
+        else
+        {
+            <button class="major start" @onclick="Start">
+                <span>&#9654;</span>
+            </button>
+            <button class="minor continue" disabled="@(Latest == null)" @onclick="Continue">
+                Continue
+            </button>
+        }
+    </div>
+</div>

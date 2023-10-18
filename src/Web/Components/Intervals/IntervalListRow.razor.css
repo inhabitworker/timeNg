@@ -1,0 +1,34 @@
+﻿.interval {
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    width: 100%;
+    margin: auto;
+    gap: 1.4em;
+    outline: 1px solid var(--fg);
+}
+
+
+::deep a.intervalLink {
+    text-decoration: none;
+    white-space: nowrap;
+    margin-left: 0.4em;
+    color: var(--highlight);
+}
+::deep a.intervalLink:visited {
+    color: var(--highlight);
+}
+::deep a.intervalLink:hover, a.listLink:visited:hover {
+    color: var(--mg);
+}
+
+
+.tagContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+.intervalTags {
+    display: flex;
+    flex-direction: row;
+}

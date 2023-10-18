@@ -1,0 +1,30 @@
+﻿@using Web.Components.Overlay
+@using Web.Components.Overlay.Header
+@using Microsoft.AspNetCore.Components
+@using System.Drawing
+@inherits LayoutBase
+
+<CascadingValue Value="Config">
+    <CascadingValue Value="ReadOnly">
+
+        <header>
+            <Navigation />
+            <Lock Toggle="ToggleReadOnly" />
+            <Connections />
+        </header>
+
+
+        <LoadingModal />
+        <Notifications />
+
+        <Active />
+
+
+        <div id="app" class="pageContainer">
+            @Body
+        </div>
+
+    </CascadingValue>
+</CascadingValue>
+
+

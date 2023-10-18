@@ -1,0 +1,20 @@
+﻿<div class="controls">
+    <EditForm Model="Filter" OnValidSubmit="QueryUpdate">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <InputText id="name" @bind-Value=Filter.Name />
+        <button type="submit">Search</button>
+    </EditForm>
+</div>
+
+@code {
+    [Parameter] public TagQuery Filter {get;set;}
+    [Parameter] public EventCallback<TagQuery> FilterChanged { get; set; }
+
+    public void QueryUpdate()
+    {
+        FilterChanged.InvokeAsync(Filter);
+    }
+}
+

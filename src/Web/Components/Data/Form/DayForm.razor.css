@@ -1,0 +1,49 @@
+﻿.controls {
+    width: 100%;
+    text-align:center;
+    padding: 1em;
+    margin: auto;
+}
+
+.date {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 50%;
+
+    margin: auto;
+    text-align: center;
+}
+.date h1 {
+    display: block;
+    white-space: nowrap;
+    flex-grow: 1;
+}
+
+.date button {
+    height: 100%;
+    width: 2em;
+    align-self: center;
+}
+
+.additional {
+    margin: auto;
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.additional button, .additional input {
+    display: inline-block;
+}
+
+
+@media only screen and (max-width: 900px) {
+    .date {
+        display: none;
+        visibility: hidden;
+    }
+
+    input {
+        display: none;
+    }
+}

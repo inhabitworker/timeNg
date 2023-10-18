@@ -1,0 +1,59 @@
+﻿<div class="date">
+    <button disabled="@(Day.Date >= DateTime.Now.Date)"  @onclick="Next"> @("<") </button>
+
+    @if(Filter.Earliest!.Value.Date == DateTime.Now.Date) 
+    { 
+        <h1>Today</h1> 
+    }
+    else 
+    { 
+        <h1>@Filter.Earliest!.Value.Date.ToString("d MMMM yyyy")</h1> 
+    }
+
+    <button @onclick="Prev"> @(">") </button>
+</div>
+
+<div class="additional">
+    <input type="date" @bind="Day" max="@DateTime.Now.Date"/>
+</div>
+
+@code {
+    [Parameter] public IntervalQuery Filter {get;set;}
+    [Parameter] public EventCallback<IntervalQuery> FilterChanged { get; set; }
+
+    public void QueryUpdate()
+    {
+        FilterChanged.InvokeAsync(Filter);
+    }
+
+    private DateTime _day;
+    private DateTime Day { 
+        get => _day; 
+        set 
+        { 
+            _day = value;
+            if (Filter.Earliest!.Value.Date != value.Date)
+            {
+                Filter.Earliest = value.Date;
+                Filter.Latest = value.Date.AddDays(1);
+                QueryUpdate();
+            }
+        } 
+    }
+
+    protected override void OnParametersSet()
+    {
+        Day = Filter.Earliest!.Value.Date;
+    }
+    protected void Next() 
+    {
+        Filter.Earliest = Day.AddDays(1);
+        QueryUpdate();
+    }
+    protected void Prev()
+    {
+        Day = Day.AddDays(-1);
+        QueryUpdate();
+    }
+
+}

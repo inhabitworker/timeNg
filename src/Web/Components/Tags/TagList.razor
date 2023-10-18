@@ -1,0 +1,15 @@
+﻿@using Web.Components.Common
+
+<div class="tags">
+    @foreach(var tag in Tags)
+    {
+        <TagListItem @key="tag" Tag="tag" />
+    }
+</div>
+
+@code {
+    [CascadingParameter] public bool ReadOnly { get; set; }
+    [Parameter, EditorRequired] public List<TagDTO> Tags { get; set; } = new();
+}
+
+

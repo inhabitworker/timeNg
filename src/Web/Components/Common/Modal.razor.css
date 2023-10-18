@@ -1,0 +1,25 @@
+﻿.blur {
+    opacity: 0.8;
+}
+
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 49;
+   
+    width: fit-content;
+    height: fit-content;
+    width: 25%;
+
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: var(--bg);
+    outline: 1px solid var(--mg);
+    border-radius: 1em;
+}
+
+.modalContent {
+    margin: auto;
+}

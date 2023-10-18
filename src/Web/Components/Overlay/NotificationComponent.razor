@@ -1,0 +1,25 @@
+﻿@inherits NotificationComponentBase 
+
+<div class="notificationContainer">
+    <div class="notificationContent">
+        <span class="notificationIcon" style="@IconStyle">
+            @if (Value.IsError)
+            {
+                <text>!</text> 
+            }
+            else
+            {
+                <text>&#8505;</text> 
+            }
+        </span>
+
+        <span class="notificationMessage">
+            @Value.Message
+        </span>
+
+        <hr class="decay" style="@DecayStyle"/>
+    </div>
+
+    <button @onclick="() => Value.Close()">x</button>
+</div>
+

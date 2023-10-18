@@ -1,0 +1,23 @@
+﻿@using Web.Services
+@using Web.Components.Common
+@implements IDisposable
+@inject StatusService statusService
+
+@if (statusService.IsLoading)
+{
+    <Modal Escapable="false">
+        <Loading Message=@statusService.LoadingMessage />
+    </Modal>
+}
+
+@code {
+    protected override void OnInitialized()
+    {
+        statusService.OnLoadingChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        statusService.OnLoadingChange -= StateHasChanged;
+    }
+}

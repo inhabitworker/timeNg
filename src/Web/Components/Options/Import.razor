@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Components;
+
+<DynamicComponent Type="Component" Parameters="Parameters" />
+
+<button disabled="@(IsVerified)" @onclick="LoadData">Preview</button>
+
+@if(Data != null)
+{
+}
+<button>Apply</button>
+
+
+@code {
+    [Parameter] public string? Param { get; set; }
+
+    private Type Component;
+    private DynamicComponent? source;
+
+    // only validate against query service filter to import data date range.
+
+    private bool IsVerified { get; set; } = false;
+    private IEnumerable<IntervalDTO>? Data { get; set; }
+
+    public void OnInitialized()
+    {
+    }
+
+    private IDictionary<string, object> Parameters { get; set; }
+
+    public Task<bool> OnVerified()
+        => (source?.Instance as IImportSource)?.Verify();
+
+    public async Task LoadData() 
+        => Data = await (source?.Instance as IImportSource)?.GetData();
+
+
+}

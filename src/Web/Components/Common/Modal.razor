@@ -1,0 +1,20 @@
+﻿@if(Escapable)
+{
+    <div class="blur" @onclick="() => Close.InvokeAsync()"/>
+}
+else
+{
+    <div class="blur" />
+}
+
+<div class="modal">
+    <div class="modalContent">
+        @ChildContent
+    </div>
+</div>
+
+@code {
+    [Parameter, EditorRequired] public RenderFragment ChildContent { get; set; }
+    [Parameter] public bool Escapable { get; set; } = true;
+    [Parameter] public EventCallback Close { get; set; }
+}

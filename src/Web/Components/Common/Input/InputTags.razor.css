@@ -1,0 +1,94 @@
+﻿.tagInput {
+    display: flex;
+}
+
+.tagGroup{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* adding tags */
+
+.addButton {
+    border: none;
+
+    align-self: center;
+    height: 1.5em;
+    width: 1.5em;
+
+    text-align: center;
+
+    line-height: 1.6em;
+
+    border-radius: 0.2em;
+    font-weight: bold;
+    font-size: 1.2em;
+    background-color: white;
+    color: black;
+    outline: 1px solid var(--mg);
+}
+
+.addButton:hover {
+    color: white;
+    background-color: var(--positive);
+    outline: 1px solid var(--bg);
+}
+
+.addButton[small] {
+    font-size: 0.8em;
+    line-height: 1.4em;
+}
+
+/* input tag */
+
+.blur {
+    z-index: 50;
+}
+
+.inputTagText {
+    height: 100%;
+}
+
+.addTag {
+    position: relative;
+    display: inline-block;
+    z-index: 51;
+    margin-left: 1em;
+}
+
+.suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.suggestions:last-child {
+    border-bottom: 1px solid var(--fg);
+}
+
+.suggestion {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.2em;
+    background-color: var(--bg);
+    color: var(--fg);
+    border: 1px solid var(--fg);
+    border-top: none;
+    border-bottom: 1px solid var(--mg);
+    font-size: 0.8em;
+}
+
+.suggestion:hover {
+    background-color: var(--highlight);
+    color: var(--highlightText);
+    cursor: pointer;
+}
+
+input {
+    z-index: 51;
+} 
+
+

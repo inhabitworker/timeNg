@@ -1,0 +1,55 @@
+﻿@using Web.Components.Tags
+@inherits IntervalTimelineNodeBase 
+
+<div class="intervalCard">
+
+    <div class="small">
+        @Head
+    </div>
+
+    <article class="record">
+
+        @if (IsEditing)
+        {
+            <IntervalEdit Interval="Interval" Close="() => IsEditing = false" />
+        }
+        else
+        {
+            @if(!ReadOnly && !IsEditing)
+            {
+                <div class="actions">
+                    <button @onclick="HandleDelete">Delete</button>
+                    <button class="edit" disabled="@(Interval.End == null)" @onclick="() => IsEditing = true">Edit</button>
+                </div>
+            }
+
+            <div class="@(Interval.End == null? "duration elapsedActive" : "duration")"> 
+                @Span.DurationString()
+            </div>
+
+            <div class="intervalTags">
+                @foreach(var tag in Interval.Tags) { <TagLabel Name="@tag" /> }
+
+                @if(Interval.Tags.Count() < 1)
+                {
+                    <small>Untagged!</small>   
+                }
+            </div>
+
+            @if (Interval.Annotation != null) 
+            {
+                <div class="annotation">
+                    <span class="label">&#8505; </span>
+                    <span class="content"> @(Interval.Annotation) </span>
+                </div>
+            }
+        }
+
+    </article>
+
+    <div class="small">
+        @Tail
+    </div>
+
+</div>
+

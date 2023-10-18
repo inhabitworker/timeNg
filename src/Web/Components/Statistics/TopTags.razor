@@ -1,0 +1,75 @@
+﻿@using Web.Services
+@using Web.Components.Common
+@inherits TopTagsBase
+
+@if(Data == null)
+{
+    <Loading />
+}
+else
+{
+    <div class="topTags">
+        @if(Data != null)
+        {
+            @if(Data.Count() > 0)
+            {
+                int width = 300;
+                int height = 80;
+
+                // jump start lowest common and show greater detail to difference region?
+                int max = Data.ElementAt(Data.Count() - 1).Intervals.Count();
+                int min = Data.ElementAt(0).Intervals.Count();
+                int delta = max - min;
+                int floor = Data.ElementAt(0).Intervals.Count() / 2;
+
+                <svg id="chart" viewBox="0 0 @width @height">
+
+                    <!--<rect width="100%" height="100%" fill="@("var(--mg)")" opacity="0.2"/>-->
+
+                    <g>
+                        @foreach(var tag in Data)
+                        {
+                            int originX = 5;
+                            int originY = 70;
+                            double barHeightComponent = tag.Intervals.Count() / (double)max;
+                            double barHeight = (originY - ((originY - 10) * barHeightComponent));
+
+                            int barWidth = 10;
+
+                            int xOffset = 2 + originX + 30 * Data.ToList().IndexOf(tag);
+
+                            <path
+                                d="@($"M {xOffset} {originY} H {xOffset + barWidth} V {barHeight} H {xOffset} Z")"
+                                id="@("tag" + tag.Name)"
+                                x="@xOffset"
+                                y="@originY"
+                                fill='@(config.GetColour(tag.Name) ?? "var(--highlight)")' 
+                            />
+                            <text>
+                                <text 
+                                    class="label countLabel"
+                                    x="@(xOffset+1)"
+                                    y="@(barHeight - 2)">
+                                    @tag.Intervals.Count()
+                                </text>
+                                <text 
+                                    class="label nameLabel"
+                                    x="@(xOffset - 2)"
+                                    y="@(originY)"
+                                    transform-origin="@(xOffset-2) @(originY)"
+                                    transform="rotate(-90,0,0)"
+                                >
+                                    @tag.Name
+                                </text>
+                            </text>                
+                        }
+                    </g>
+                </svg>
+            }
+            else
+            {
+                <aside class="empty">No tags.</aside>
+            }
+        }
+    </div>
+}

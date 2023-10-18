@@ -1,0 +1,16 @@
+﻿<div class="loader">
+
+    <div class="loadSpinner"/>
+
+    <!--<h4>Please wait...</h4>-->
+
+    @if(Message != null)
+    {
+        <p class="small"> @Message </p>
+    }
+</div>
+
+@code {
+    [Parameter] public string? Message { get; set; }
+}
+

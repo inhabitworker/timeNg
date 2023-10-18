@@ -1,0 +1,29 @@
+﻿@using Web.Components.Tags
+@inherits IntervalBase 
+
+
+<article class="interval">
+
+    @if (!ReadOnly)
+    {
+       <input class="selectRow" type="checkbox" @bind="Interval.IsSelected" />
+    }
+
+    <NavLink class="intervalLink" href='@("/day/" + Interval.Start.Date.ToString("ddMMyyyy"))'>
+        @Interval.Start.ToString("dd/MM/yyyy")
+        @Interval.Start.ToString(@"HH\:mm") - @(Interval.End != null ? Interval.End.Value.ToString(@"HH\:mm") : "Now" )
+    </NavLink>
+
+    <div class="@(Interval.End == null? "duration elapsedActive" : "duration")"> 
+        @Span.DurationString()
+    </div>
+
+    <div class="intervalTags">
+        @foreach(var tag in Interval.Tags) { <TagLabel Name="@tag" /> }
+
+        @if(Interval.Tags.Count() < 1)
+        {
+            <div class="untagged">Untagged!</div>   
+        }
+    </div>
+</article>

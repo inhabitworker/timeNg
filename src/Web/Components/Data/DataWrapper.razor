@@ -1,0 +1,38 @@
+﻿@using Web.Components.Common
+@using Web.Components.Data.Form
+
+@typeparam T
+@typeparam U where U : Query
+
+<div class="heading">
+    <DataHeading Data="Parent.Response" @bind-Filter="Parent.Filter" />
+</div>
+
+<div class="view">
+    @if (Parent.Response == null && Parent.IsLoading == false)
+    {
+        <div class="failed">
+            Couldn't fetch data.
+        </div>
+    }
+    else if (Parent.Response == null)
+    {
+        <Loading />
+    }
+    else if (Parent.Response.Data.Count() == 0)
+    {
+       <div class="small"> 
+           No data found.
+        </div>
+    }
+    else
+    {
+        @ChildContent
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired] public DataComponentBase<T, U> Parent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
+}
+

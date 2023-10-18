@@ -1,0 +1,47 @@
+﻿.intervalEdit {
+    display: flex;
+    flex-direction: column;
+    
+    margin: auto;
+    width: 80%;
+    background-color: var(--bg);
+    outline: 1px solid var(--fg);
+    border-radius: 0.4em;
+    padding: 1em;
+}
+
+h3 {
+    text-align: center;
+    margin-top: 0.1em;
+}
+
+.inputs {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: auto;
+    grid-row-gap: 0.4em;
+}
+
+.inputs.tags {
+    margin-bottom: 0.5em;
+}
+
+.inputs label {
+}
+
+::deep .tagInput {
+    display: none;
+}
+
+::deep .inputs input {
+}
+
+.actions {
+    display: flex;
+    flex-direction: row;
+    padding-top: 0.6em;
+    justify-content:center; 
+    gap: 1em;
+
+    margin: auto;
+}

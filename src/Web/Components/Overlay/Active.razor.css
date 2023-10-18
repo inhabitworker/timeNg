@@ -1,0 +1,177 @@
+﻿.active{
+    position: fixed;
+    width: fit-content;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    right: 0;
+    margin: 0.4em;
+    padding: 0.8em;
+
+    display: flex;
+    min-height: 2.5rem;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1em;
+    border: 1px solid var(--fg);
+    box-shadow: 2px 2px 0px var(--highlight);
+    background-color: var(--bg);
+
+    transition: 1s all;
+
+    z-index: 90;
+}
+
+.elapsed {
+    font-family: monospace;
+    flex-shrink: 0;
+    align-self: center;
+    font-size: 2em;
+    font-weight: bold;
+    padding-right: 0.5em;
+    border-right: solid 1px var(--fg);
+}
+
+.tags {
+    flex-grow: 1;
+    align-self: center;
+}
+
+.actions {
+    flex-shrink: 0;
+    width: 4em;
+
+    align-self: center;
+}
+
+/* overruled. */
+button {
+    border: none;
+}
+
+.major {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: auto;
+    height: 1.5em;
+    width: 1.5em;
+    border-radius: 0.4em;
+    border: 1px solid var(--fg);
+    transition: all 0.4s;
+    box-shadow: none;
+    font-size: 2em;
+    transform: translate(0px, 0px);
+}
+
+.validateion {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.major span {
+    display: block;
+}
+
+.major:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 2px 2px 0px var(--highlight);
+}
+
+.major:active {
+    color: var(--fg);
+    border-color: var(--fg);
+    background-color: var(--bg);
+
+    transform: none;
+    box-shadow: none;
+}
+
+.stop {
+    line-height: 0.2em;
+    background-color: var(--highlight);
+    color: var(--bg);
+}
+.stop:hover {
+    background-color: var(--negative);
+    color: white;
+}
+.stop span {
+    transform: translate(0px, -2px);
+}
+
+.start {
+    background-color: var(--bg);
+    color: var(--highlight);
+}
+.start:hover {
+   background-color: var(--positive);
+   color: white;
+}
+.start span {
+    transform: translate(1px, 1px);
+}
+
+.start:active, .stop:active {
+    background-color: var(--mg);
+    color: var(--highlight); 
+}
+
+.minor {
+    display: block;
+    background: none;
+    width: 100%;
+    margin: auto;
+    margin-top: 0.4em;
+    text-align: center;
+}
+
+.minor:hover {
+    text-decoration: underline;
+}
+
+.continue{
+    color: var(--mg);
+}
+
+.cancel {
+    color: red;
+}
+
+@media only screen and (max-width: 900px) {
+    .status {
+        border-radius: 0;
+        outline: none;
+        border: none;
+        
+        box-shadow: 0px 0px 24px var(--mg);
+
+        background-color: var(--bg);
+
+        display: grid;
+        grid-template-areas:
+            "elapsed actions"
+            "tags actions";
+    }
+
+    .elapsed {
+        grid-area: elapsed;
+        font-size: 1em;
+        border: none;
+    }
+
+    .tags {
+        grid-area: tags;
+    }
+
+    .actions {
+        grid-area: actions;
+    }
+}
+
+

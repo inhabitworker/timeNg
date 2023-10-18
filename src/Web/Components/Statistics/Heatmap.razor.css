@@ -1,0 +1,38 @@
+﻿.heatmap {
+    display: block;
+    margin: auto;
+}
+
+.dayDot {
+}
+
+.dayDotLabel {
+    position: absolute;
+    visibility: hidden;
+}
+
+.dayDot:hover {
+    outline: 0.25px solid var(--fg);
+}
+
+.dayDot:hover + .dayDotLabel {
+    font-size: 0.35em;
+    transform: translate(-252px, 60px);
+    visibility: visible;
+}
+
+.yAxis, .xAxis, .legendLabel, .dayDotLabel {
+    fill: var(--fg);
+}
+
+.yAxis, .xAxis {
+    font-size: 0.35em;
+}
+
+.legend {
+    transform: translate(280px, 67px);
+}
+
+.legendLabel {
+    font-size: 0.35em;
+}

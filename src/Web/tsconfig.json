@@ -1,0 +1,17 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "lib": [ "es2020", "dom" ],
+    //"webworker"
+    //"module":  "commonjs",
+    "sourceMap": true,
+    "target": "es5"
+  }
+  /*
+  "exclude": [
+    "wwwroot/js/dist",
+  ]*/
+}

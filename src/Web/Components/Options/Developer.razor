@@ -1,0 +1,24 @@
+﻿@inherits DeveloperBase
+
+<div class="devActions">
+    <div class="actionSet data">
+        <h4>Data:</h4>
+        <div class="actions">
+            <button @onclick="() => Seed()">Generate Data (3 Months)</button>
+            <button @onclick="() => Seed(12)">Generate Data (1 Years)</button>
+            <button @onclick="GenerateColour">Generate Colour Matches</button>
+        </div>
+    </div>
+
+    <div class="actionSet features">
+        <h4>Features:</h4>
+        <div class="actions">
+            <button @onclick="FakeLoad">Loading Test</button>
+            <button @onclick="() => AddNotification(false)">Add Notification</button>
+            <button @onclick="() => AddNotification(true)">Add Error</button>
+
+            <button @onclick="() => AddNotificationGlobal(false)">Add Notification (Global)</button>
+            <button @onclick="() => AddNotificationGlobal(true)">Add Error (Global)</button>
+        </div>
+    </div>
+</div>

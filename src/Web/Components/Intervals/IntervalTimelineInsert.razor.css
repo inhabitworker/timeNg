@@ -1,0 +1,34 @@
+﻿.insert {
+    margin: auto;
+}
+
+button {
+    display: block;
+    margin: auto;
+
+    width: 100px;
+    height: fit-content; 
+    color: var(--fg);
+    background-color: var(--bg);
+    border: 1px solid var(--mg);
+
+    transition: 0.25s all;
+}
+
+button[disabled] {
+    color: var(--mg);
+}
+
+button:not(button[disabled]):hover {
+    width: 150px;
+    font-size: 1.2em;
+    color: var(--highlightText);
+    background-color: var(--highlight);
+}
+
+button:not(button[disabled]):active {
+    color: var(--bg);
+    background-color: var(--fg);
+}
+
+

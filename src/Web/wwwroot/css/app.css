@@ -1,0 +1,166 @@
+/** root layout styles **/
+
+:root {
+    /* doesnt work.. but see env() draft */
+    --maxRes: 900px;
+}
+
+#app {
+    background-color: var(--bg);
+    color: var(--fg);
+}
+
+body {
+    font-family: monospace, Arial, sans-serif;
+    margin: 0;
+    overflow: hidden;
+
+    color: var(--fg);
+    background-color: var(--bg);
+    overflow-y: scroll;
+}
+
+/* common sectioned style */
+section {
+    outline: 1px solid var(--mg);
+    width: 100%;
+    margin: auto;
+    margin-bottom: 1em;
+    padding-top: 0em;
+}
+section h2 {
+    background-color: var(--fg);
+    color: var(--bg);
+
+    font-size: 1.2em;
+
+    padding: 0.2em;
+    margin: 0;
+    margin-bottom: 1em;
+}
+section div {
+    padding: 0.4em;
+}
+
+@media only screen and (max-width: 900px) {
+    body {
+        font-size: 1.4em;
+        overflow-y: auto;
+    }
+
+    section {
+        outline: none;
+    }
+}
+
+
+/* other app-wide specifics */
+
+/* blazor */
+#components-reconnect-modal {
+    display: none;
+    transition: visibility 0s linear 500ms;
+}
+#components-reconnect-modal.components-reconnect-show,
+#components-reconnect-modal.components-reconnect-failed,
+#components-reconnect-modal.components-reconnect-rejected {
+    display: block;
+}
+
+/* loading/Modal */
+.blur {
+    position: fixed;
+    min-height: 100%;
+    min-width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    /* background: radial-gradient(white 25%, black 100%); */
+    background: var(--bg);
+    opacity: 0;
+    z-index: 15;
+}
+.blur {
+    opacity: 0.8;
+}
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 49;
+   
+    width: fit-content;
+    height: fit-content;
+    width: 25%;
+
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: var(--bg);
+    outline: 1px solid var(--mg);
+    border-radius: 1em;
+}
+.modalContent {
+    margin: auto;
+}
+.loadingTitle {
+    text-align: center;
+}
+.loader {
+    margin: auto;
+    width: 80%;
+    background-color: var(--bg);
+    /*outline: 1px solid var(--fg);*/
+    border-radius: 0.4em;
+    padding: 1em;
+}
+.loadSpinner {
+    margin: auto; 
+    width: 2em;
+    height: 2em;
+    border-radius: 4em;
+    background: none;
+    border: 1em groove var(--highlight);
+    animation: 1s linear infinite spin;
+}
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+.loader h4 {
+    text-align: center;
+    margin-bottom:0.5em;
+}
+.loader p {
+    text-align: center;
+    margin: 0;
+}
+.small {
+    font-size: 0.8em;
+}
+
+/* anchor default override */
+a {
+    text-decoration: none;
+    color: var(--highlight);
+}
+a:hover {
+    color: var(--mg);
+}
+a:visited {
+    color: var(--highlight); 
+    text-decoration: none;
+}
+a:visited:hover {
+    color: var(--mg);
+}
+a.active {
+    color: var(--mg);
+    text-decoration: none;
+}
+
